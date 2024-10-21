@@ -1,0 +1,12 @@
+server:
+  port: 8085
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gestao_pedidos
+    username: gestaopedidos
+    password: Aa*32562715
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
