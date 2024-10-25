@@ -41,7 +41,7 @@ public class CustomersController {
 
 	}
 
-	@GetMapping("/view/{email}")
+	@GetMapping("/view/email/{email}")
 	@Operation(summary = "Visualizar os dados do cliente", description = "Cria um novo cliente e salva no banco de dados.")
 	public ResponseEntity<?> customerView(@PathVariable String email) {
 		return customersService.customerView(email);
