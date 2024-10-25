@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +23,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(value = "/customers")
 public class CustomersController {
 
-
 	@Autowired
 	private CustomersService customersService;
-    @Operation(summary = "Registrar um novo cliente", description = "Cria um novo cliente e salva no banco de dados.")
+
+	@Operation(summary = "Registrar um novo cliente", description = "Cria um novo cliente e salva no banco de dados.")
 	@PostMapping("/registration")
 	public ResponseEntity<MessageDTO> customerRegistration(@RequestBody CustomersDTO dto) {
 		MessageDTO response = customersService.customerRegistration(dto);
@@ -38,10 +40,17 @@ public class CustomersController {
 		}
 
 	}
-	
-	@GetMapping("/view")
-	public ResponseEntity<?> customerView(){
+
+	@GetMapping("/view/{email}")
+	@Operation(summary = "Visualizar os dados do cliente", description = "Cria um novo cliente e salva no banco de dados.")
+	public ResponseEntity<?> customerView(@PathVariable String email) {
+		return customersService.customerView(email);
+	}
+
+	@PutMapping("/edit")
+	@Operation(summary = "Editar dados do cliente", description = "Cria um novo cliente e salva no banco de dados.")
+	public ResponseEntity<?> customerEdit(@RequestBody CustomersDTO dto) {
 		return null;
-		}
- 
+	}
+
 }

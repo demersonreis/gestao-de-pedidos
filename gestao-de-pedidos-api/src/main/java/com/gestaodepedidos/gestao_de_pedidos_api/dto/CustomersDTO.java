@@ -13,9 +13,20 @@ public class CustomersDTO {
 	private String email;
 	private String phone;
 
+	public CustomersDTO(String name, String email, String phone) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
 	public static Customers customersToEntity(CustomersDTO dto) {
-	   Customers customers = new Customers(dto.getName(), dto.getEmail(), dto.getPhone());
-	   return customers;
+		Customers customers = new Customers(dto.getName(), dto.getEmail(), dto.getPhone());
+		return customers;
+	}
+
+	public static CustomersDTO customersToDTO(Customers entity) {
+		CustomersDTO customers = new CustomersDTO(entity.getName(), entity.getEmail(), entity.getPhone());
+		return customers;
 	}
 
 }

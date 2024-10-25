@@ -8,4 +8,6 @@ import com.gestaodepedidos.gestao_de_pedidos_api.entity.customers.Customers;
 @Repository
 public interface CustomersRepository extends JpaRepository<Customers, Integer> {
 
+	Customers findByEmail(String email);
+
 }
