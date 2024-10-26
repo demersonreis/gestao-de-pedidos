@@ -38,9 +38,7 @@ public class CustomersService {
 			Customers customers = customersRepository.findByEmail(email);
 			if (customers == null) {
                 logger.warn("Cliente com o email {} não encontrado", email);
-				MessageDTO message = new MessageDTO(MessageRequest.BAD_REQUEST,
-						MessageRequest.ESTABELECIMENTO_NAO_CADASTRADO + email);
-				return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(CustomersRequest.registrationNot(email), HttpStatus.BAD_REQUEST);
 			}
             logger.info("Cliente encontrado com sucesso, convertendo para DTO");
 			CustomersDTO customersToDTO = CustomersDTO.customersToDTO(customers);
@@ -51,5 +49,10 @@ public class CustomersService {
 			return new ResponseEntity<>(new MessageDTO(MessageRequest.INTERNAL_SERVER_ERROR, "Erro inesperado: " + e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	public ResponseEntity<?> customerEdit(CustomersDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

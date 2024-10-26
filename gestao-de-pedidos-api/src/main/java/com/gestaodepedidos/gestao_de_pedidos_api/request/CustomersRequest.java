@@ -5,11 +5,12 @@ import com.gestaodepedidos.gestao_de_pedidos_api.dto.MessageDTO;
 public class CustomersRequest {
 
 	public static MessageDTO registrationOK() {
-		MessageDTO messageDTO = new MessageDTO();
-		messageDTO.setCod(MessageRequest.OK);
-		messageDTO.setDescricao(MessageRequest.CADASTRO_OK);
-		return messageDTO;
+		return new MessageDTO(MessageRequest.OK, MessageRequest.CADASTRO_OK);
 
 	}
 
+	public static MessageDTO registrationNot(String email) {
+		return new MessageDTO(MessageRequest.BAD_REQUEST, MessageRequest.ESTABELECIMENTO_NAO_CADASTRADO + email);
+
+	}
 }

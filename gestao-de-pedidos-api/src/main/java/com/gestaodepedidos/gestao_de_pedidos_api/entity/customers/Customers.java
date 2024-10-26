@@ -19,7 +19,7 @@ public class Customers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
 	@SequenceGenerator(name = "customer_seq", sequenceName = "customers_id_seq", allocationSize = 1)
-	private Integer id;
+	private Integer customers_id;
 
 	@Column(name = "name", nullable = false, length = 100)
 	private String name;
@@ -32,7 +32,7 @@ public class Customers {
 
 	public Customers(Integer id, String name, String email, String phone) {
 		super();
-		this.id = id;
+		this.customers_id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;

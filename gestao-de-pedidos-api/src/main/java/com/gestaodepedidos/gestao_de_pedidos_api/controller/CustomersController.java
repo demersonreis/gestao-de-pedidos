@@ -50,7 +50,7 @@ public class CustomersController {
 	@PutMapping("/edit")
 	@Operation(summary = "Editar dados do cliente", description = "Cria um novo cliente e salva no banco de dados.")
 	public ResponseEntity<?> customerEdit(@RequestBody CustomersDTO dto) {
-		return null;
+		return customersService.customerEdit(dto);
 	}
 
 }
