@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersEditDTO;
+import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersViewDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.MessageDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.entity.customers.Customers;
 import com.gestaodepedidos.gestao_de_pedidos_api.repository.CustomersRepository;
@@ -42,7 +43,7 @@ public class CustomersService {
 				return new ResponseEntity<>(CustomersRequest.registrationNot(email), HttpStatus.BAD_REQUEST);
 			}
 			logger.info("Cliente encontrado com sucesso, convertendo para DTO");
-			CustomersDTO customersToDTO = CustomersDTO.customersToDTO(customers);
+			CustomersViewDTO customersToDTO = CustomersViewDTO.customersToDTO(customers);
 			return new ResponseEntity<>(customersToDTO, HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -64,9 +65,7 @@ public class CustomersService {
 	            return new ResponseEntity<>(CustomersRequest.registrationNot(email), HttpStatus.BAD_REQUEST);
 	        }
 	        
-	        Customers customersSave = CustomersEditDTO.customersToEntity(dto);
-	        customersSave.setCustomers_id(customers.getCustomers_id());
-	        customersSave.setEmail(email);
+	        Customers customersSave = CustomersEditDTO.customersToEntity(dto, customers);
 	        customersRepository.save(customersSave);
 	        
 	        logger.info("Cliente com o email {} editado com sucesso", email);

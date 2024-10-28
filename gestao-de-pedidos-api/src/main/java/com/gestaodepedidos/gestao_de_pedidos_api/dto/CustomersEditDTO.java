@@ -17,8 +17,9 @@ public class CustomersEditDTO {
 		this.phone = phone;
 	}
 
-	public static Customers customersToEntity(CustomersEditDTO dto) {
-		Customers customers = new Customers(dto.getName(), dto.getPhone());
+	public static Customers customersToEntity(CustomersEditDTO dto, Customers customers2) {
+		Customers customers = new Customers(customers2.getCustomers_id(),dto.getName(), customers2.getEmail(),
+				dto.getPhone(), customers2.getStatus());
 		return customers;
 	}
 

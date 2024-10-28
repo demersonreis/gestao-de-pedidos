@@ -29,7 +29,10 @@ public class Customers {
 
 	@Column(name = "phone", length = 15)
 	private String phone;
-
+	
+	@Column(name = "status", length = 1)
+	private Integer status;  
+	
 	public Customers(Integer id, String name, String email, String phone) {
 		super();
 		this.customers_id = id;
@@ -38,20 +41,29 @@ public class Customers {
 		this.phone = phone;
 	}
 
-	public Customers(String name, String email, String phone) {
+	public Customers(String name, String email, String phone, Integer status) {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.status = status;
 	}
 
 	public Customers(String name, String phone) {
 		this.name = name;
-
 		this.phone = phone;
 	}
 
 	public Customers() {
 		super();
+	}
+
+	public Customers(Integer customers_id, String name, String email, String phone, Integer status) {
+		super();
+		this.customers_id = customers_id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.status = status;
 	}
 
 }

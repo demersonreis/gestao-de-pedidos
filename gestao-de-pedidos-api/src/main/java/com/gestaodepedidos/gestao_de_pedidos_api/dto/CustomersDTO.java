@@ -20,7 +20,7 @@ public class CustomersDTO {
 	}
 
 	public static Customers customersToEntity(CustomersDTO dto) {
-		Customers customers = new Customers(dto.getName(), dto.getEmail(), dto.getPhone());
+		Customers customers = new Customers(dto.getName(), dto.getEmail(), dto.getPhone(), 1);
 		return customers;
 	}
 
