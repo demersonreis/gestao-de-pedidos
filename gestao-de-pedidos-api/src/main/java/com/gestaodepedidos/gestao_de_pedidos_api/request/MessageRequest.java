@@ -10,4 +10,6 @@ public class MessageRequest {
 	public static final String ATUALIZACAO_OK = "Atualização realizada com sucesso!";
 	public static final String ATUALIZACAO_ERRO = "Erro ao realizar atualização.";
     public static final String ESTABELECIMENTO_NAO_CADASTRADO = "Estabelecimento não cadastrado: ";
+    public static final String ESTABELECIMENTO_ALTERADO = "Estabelecimento Alterado com sucesso: ";
+
 }

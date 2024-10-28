@@ -44,6 +44,12 @@ public class Customers {
 		this.phone = phone;
 	}
 
+	public Customers(String name, String phone) {
+		this.name = name;
+
+		this.phone = phone;
+	}
+
 	public Customers() {
 		super();
 	}

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersDTO;
+import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersEditDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.MessageDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.entity.customers.Customers;
 import com.gestaodepedidos.gestao_de_pedidos_api.repository.CustomersRepository;
@@ -37,22 +38,47 @@ public class CustomersService {
 		try {
 			Customers customers = customersRepository.findByEmail(email);
 			if (customers == null) {
-                logger.warn("Cliente com o email {} não encontrado", email);
+				logger.warn("Cliente com o email {} não encontrado", email);
 				return new ResponseEntity<>(CustomersRequest.registrationNot(email), HttpStatus.BAD_REQUEST);
 			}
-            logger.info("Cliente encontrado com sucesso, convertendo para DTO");
+			logger.info("Cliente encontrado com sucesso, convertendo para DTO");
 			CustomersDTO customersToDTO = CustomersDTO.customersToDTO(customers);
 			return new ResponseEntity<>(customersToDTO, HttpStatus.OK);
-			
+
 		} catch (Exception e) {
-            logger.error("Erro inesperado ao buscar cliente com o email: {}", email, e);
-			return new ResponseEntity<>(new MessageDTO(MessageRequest.INTERNAL_SERVER_ERROR, "Erro inesperado: " + e.getMessage()),
+			logger.error("Erro inesperado ao buscar cliente com o email: {}", email, e);
+			return new ResponseEntity<>(
+					new MessageDTO(MessageRequest.INTERNAL_SERVER_ERROR, "Erro inesperado: " + e.getMessage()),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	public ResponseEntity<?> customerEdit(CustomersDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<?> customerEdit(CustomersEditDTO dto, String email) {
+	    logger.info("Iniciando o processo de edição do cliente com o email: {}", email);
+	    
+	    try {
+	        Customers customers = customersRepository.findByEmail(email);
+	        
+	        if (customers == null) {
+	            logger.warn("Cliente com o email {} não encontrado", email);
+	            return new ResponseEntity<>(CustomersRequest.registrationNot(email), HttpStatus.BAD_REQUEST);
+	        }
+	        
+	        Customers customersSave = CustomersEditDTO.customersToEntity(dto);
+	        customersSave.setCustomers_id(customers.getCustomers_id());
+	        customersSave.setEmail(email);
+	        customersRepository.save(customersSave);
+	        
+	        logger.info("Cliente com o email {} editado com sucesso", email);
+	        return new ResponseEntity<>(CustomersRequest.registrationEdit(email), HttpStatus.OK);
+	        
+	    } catch (Exception e) {
+	        logger.error("Erro inesperado ao editar cliente com o email: {}", email, e);
+	        return new ResponseEntity<>(
+	            new MessageDTO(MessageRequest.INTERNAL_SERVER_ERROR, "Erro inesperado: " + e.getMessage()),
+	            HttpStatus.INTERNAL_SERVER_ERROR
+	        );
+	    }
 	}
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersDTO;
+import com.gestaodepedidos.gestao_de_pedidos_api.dto.CustomersEditDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.dto.MessageDTO;
 import com.gestaodepedidos.gestao_de_pedidos_api.service.CustomersService;
 
@@ -47,10 +48,10 @@ public class CustomersController {
 		return customersService.customerView(email);
 	}
 
-	@PutMapping("/edit")
+	@PutMapping("/edit/email/{email}")
 	@Operation(summary = "Editar dados do cliente", description = "Cria um novo cliente e salva no banco de dados.")
-	public ResponseEntity<?> customerEdit(@RequestBody CustomersDTO dto) {
-		return customersService.customerEdit(dto);
+	public ResponseEntity<?> customerEdit(@RequestBody CustomersEditDTO dto,@PathVariable String email) {
+		return customersService.customerEdit(dto,email);
 	}
 
 }

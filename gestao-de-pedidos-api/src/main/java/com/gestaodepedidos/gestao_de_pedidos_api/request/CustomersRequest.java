@@ -13,4 +13,10 @@ public class CustomersRequest {
 		return new MessageDTO(MessageRequest.BAD_REQUEST, MessageRequest.ESTABELECIMENTO_NAO_CADASTRADO + email);
 
 	}
+	
+	public static MessageDTO registrationEdit(String email) {
+		return new MessageDTO(MessageRequest.OK, MessageRequest.ESTABELECIMENTO_ALTERADO + email);
+
+	}
+
 }
