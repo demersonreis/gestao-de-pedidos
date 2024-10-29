@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/gestao_pedidos
-    username: gestaopedidos
+    url: jdbc:postgresql://localhost:5432/gestao_tarefas
+    username: gestaotarefas
     password: Aa*32562715
   jpa:
     hibernate:

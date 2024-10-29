@@ -1,10 +1,20 @@
 package com.gestaodepedidos.gestao_de_pedidos_api.entity.customers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gestaodepedidos.gestao_de_pedidos_api.entity.user.User;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -32,6 +42,13 @@ public class Customers {
 	
 	@Column(name = "status", length = 1)
 	private Integer status;  
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<CustomerAddress> addresses =  new ArrayList<>();
+	
+	@OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
 	
 	public Customers(Integer id, String name, String email, String phone) {
 		super();

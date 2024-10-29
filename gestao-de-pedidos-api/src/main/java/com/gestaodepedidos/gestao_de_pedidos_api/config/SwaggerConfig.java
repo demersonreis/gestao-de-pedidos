@@ -16,7 +16,7 @@ public class SwaggerConfig {
 
 
 	@Bean
-	public OpenAPI springShopOpenAPI() {
+	OpenAPI springShopOpenAPI() {
 	    return new OpenAPI()
 	            .info(new Info().title("Gestão Pedidos")
 	                    .version("v0.0.0")
